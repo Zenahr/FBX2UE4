@@ -20,7 +20,7 @@ bl_info = {
     "name": "UE4 Tools",
     "author": "LluisGarcia3D",
     "version": (1, 2, 4),
-    "blender": (2, 7, 5),
+    "blender": (2, 80, 0),
     "location": "View3D > Tools > UE4 Tools",
     "description": "Adds some tools for improve the blender to unreal engine workflow",
     "warning": "",
