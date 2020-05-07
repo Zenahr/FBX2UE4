@@ -106,7 +106,6 @@ UE_IK_Lock_R_foot = True
 UE_IK_Lock_L_foot = True
 
 
-
 UE_IK_Leg = True
 UE_IK_Arm = True
 UE_IK_Showbones = False
@@ -154,34 +153,29 @@ FBX_Smoothing = 0
 FBX_smooth_Type= "OFF"
 FBXSmoothingType = 'OFF'
 
-
 #-------------------------------------------
 #---------------UI Callbacks----------------
 #-------------------------------------------
 #scene tools Active?
 def UE_Scene_Tools_Callback (scene,context):    
-    
     global UE_SceneTools
     UE_SceneTools = scene.UESceneTools
     
     
 #Rename tools Active?
 def UE_Rename_Tools_Callback (scene,context):    
-    
     global UE_RenameTools
     UE_RenameTools = scene.UERenameTools
     
     
 #Export tools Active?
 def UE_Export_Tools_Callback (scene,context):    
-    
     global UE_ExportTools
     UE_ExportTools = scene.UEExportTools
     
 
 #Animation tools Active?
 def UE_Animation_Tools_Callback (scene,context):    
-    
     global UE_AnimationTools
     UE_AnimationTools = scene.UEAnimationTools
 
@@ -231,7 +225,6 @@ def Main_UI_Properties(scn):
 #---------------------
 
 def ObjScale_Callback (scene,context):    
-    
     global ObjScale
     ObjScale = scene.UEObjScale  
     print (ObjScale)
@@ -241,7 +234,6 @@ def ObjScale_Callback (scene,context):
 #Props ---------------
 #---------------------
 def SetObjScale(scn): 
-     
      bpy.types.Scene.UEObjScale = BoolProperty(
         name = "Scale Selected Objects",update = ObjScale_Callback,
         description = "True or False?")        
@@ -262,7 +254,6 @@ def SetObjScale(scn):
 
 #base name callback
 def Obj_Base_Name_Selector_Callback (scene,context):    
-    
     global ObjBaseNameSelector
     ObjBaseNameSelector = scene.naming_base  
     print ("Base name = " + str(ObjBaseNameSelector))       
@@ -270,21 +261,18 @@ def Obj_Base_Name_Selector_Callback (scene,context):
 
 #Rename object selector callback
 def Rename_Objects_Callback (scene,context):
-       
     global RenameObjects    
     RenameObjects = scene.rename_object  
     print ("Rename Objects = " + str(RenameObjects))
 
 #Rename Data selector callback    
 def Rename_Data_Callback (scene,context):
-       
     global RenameData    
     RenameData = scene.rename_data 
     print ("Rename Data = " + str(RenameData))
 
 #Rename Materials selector callback        
 def Rename_materials_Callback (scene,context):
-       
     global RenameMaterials   
     RenameMaterials = scene.rename_material 
     print ("Rename Materials = " + str(RenameMaterials))
@@ -292,28 +280,24 @@ def Rename_materials_Callback (scene,context):
 #Add Prefix selector callback
 
 def Prefix_selector_Callback (scene,context):
-       
     global PrefixSelector   
     PrefixSelector = scene.rename_use_prefix 
     print ("Add Prefix = " + str(PrefixSelector)) 
 
 #Add Prefix to objects callback
 def Prefix_objects_Callback (scene,context):
-       
     global PrefixObj   
     PrefixObj = scene.prefix_object
     print ("Add Prefix to objects = " + str(PrefixObj)) 
 
 #Add Prefix to Data callback
 def Prefix_data_Callback (scene,context):
-       
     global PrefixData   
     PrefixData  = scene.prefix_data 
     print ("Add Prefix to data = " + str(PrefixData)) 
     
 #Add Prefix to Materials callback
 def Prefix_materials_Callback (scene,context):
-       
     global PrefixMat   
     PrefixMat = scene.prefix_material 
     print ("Add Prefix to materials = " + str(PrefixMat))
@@ -322,7 +306,6 @@ def Prefix_materials_Callback (scene,context):
 
 #Is Collision callback
 def Collision_Callback (scene,context):
-       
     global Collision   
     Collision = scene.IsCollision 
     print ("is a collisoin object = " + str(Collision))
@@ -334,7 +317,6 @@ def Collision_Callback (scene,context):
 #-------------------------------------------
 
 def Rename_Properties(scn):
-    
     #name origins
     name_origins = [
                     ('Custom', 'Custom', 'Custom'),
@@ -433,12 +415,6 @@ def Rename_Properties(scn):
         description = "If Checked, add the collision prefix")
     scn['IsCollision'] = False
     
-
-     
-
-
-
-
 #-------------------------------------------
 #---------BATCH RENAME FUNCTIONS------------
 #-------------------------------------------
@@ -453,7 +429,6 @@ def Get_custom_prefix(label, key, scn):
     global Prefix     
     Prefix = scn["rename_prefix"]
     
-
 #Get firts Material
 def get_first_material_name(ob):    
     for m_slot in ob.material_slots:
@@ -461,25 +436,16 @@ def get_first_material_name(ob):
             material_name = m_slot.material.name
             return material_name
         
-
-
-    
 #main Function for rename    
 def Rename_detablocks(self, context):
-    
     obs = bpy.context.selected_objects
     sufix = 0
     global PrefixSelector
     global Prefix
-    
     scn = context.scene
-    
     Get_custom_prefix("String:   ", 'rename_prefix', scn)
-    
-    
-        
-    for ob in obs:
-        
+
+    for ob in obs:        
         #Get Base Names         
         if ObjBaseNameSelector == 'Object':
             name = ob.name
@@ -489,7 +455,7 @@ def Rename_detablocks(self, context):
                 name = ob.data.name            
             else:
                 name = ob.name
-            
+
         if ObjBaseNameSelector == 'Material':        
             material_name = get_first_material_name(ob)               
             if not material_name:
@@ -507,7 +473,6 @@ def Rename_detablocks(self, context):
         if PrefixSelector == True:
             print (Prefix)                  
        
-       
         #Rename objects Names
         if RenameObjects == True:
             if (PrefixSelector == True
@@ -523,8 +488,6 @@ def Rename_detablocks(self, context):
                 
             #else:
                 #ob.name = name
-                  
-                
                 
         #Rename objects data Names        
         if RenameData == True:
@@ -543,7 +506,6 @@ def Rename_detablocks(self, context):
                 #else:
                     #ob.data.name = name                   
         
-        
         #Rename material Names             
         if RenameMaterials == True:
             if ob.material_slots:
@@ -557,128 +519,105 @@ def Rename_detablocks(self, context):
                                 #m_slot.material.name = name
         sufix = sufix + 1
                 
-        
 #-------------------------------------------
 #------------FBX EXPORT CALLBACKS-----------
 #-------------------------------------------
 
 def FBX_Show_Axis_Callback (scene,context):
-        
     global FBX_ShowAxis
     FBX_ShowAxis = scene.FBX_Show_Axis
     print ("Base name = " + str(FBX_ShowAxis))
-    
 
 def FBX_Axis_Forward_Callback (scene,context):
-        
     global FBX_AxisForward
     FBX_AxisForward = scene.FBX_Axis_Forward
     print(FBX_AxisForward)
       
 def FBX_Axis_Up_Callback (scene,context):
-        
     global FBX_AxisUp
     FBX_AxisUp = scene.FBX_Axis_Up
     print(FBX_AxisUp)
 
 def FBX_Smoothing_Selector_Callback (scene,context):
-    
     global FBXSmoothingType
     FBXSmoothingType = scene.FBX_Smoothing
     print (str(FBXSmoothingType))
     
 def FBX_Base_Name_Selector_Callback (scene,context):
-        
     global FBXBaseNameSelector
     FBXBaseNameSelector = scene.FBX_base_name  
     print ("Base name = " + str(FBXBaseNameSelector)) 
     
 def FBX_Relative_Assets_Folder_Callback (scene,context):    
-    
     global FBXRelativeFolderSelector
     FBXRelativeFolderSelector = scene.FBX_Relative_Assets_Folder 
     print ("Base name = " + str(FBXRelativeFolderSelector))
     
     
 def FBX_Export_Collision_Callback  (scene,context):    
-    
     global FBX_ExportCollision
     FBX_ExportCollision = scene.FBX_Export_Collision_Obj
     print ("Base name = " + str(FBX_ExportCollision))
     
     
 def FBX_TangentSpace_Callback (scene,context):    
-    
     global FBX_Tangent
     FBX_Tangent = scene.FBX_TangentSpace
     print ("Base name = " + str(FBX_Tangent))
     
     
 def FBX_BakeAnim_Callback (scene,context):    
-    
     global FBX_Bake_Anim
     FBX_Bake_Anim = scene.FBX_BakeAnim
     print ("Base name = " + str(FBX_Bake_Anim))
     
 def FBX_NLA_Callback (scene,context):    
-    
     global FBX_NLA
     FBX_NLA = scene.FBX_Use_NLA
     print ("Base name = " + str(FBX_NLA))
 
 def FBX_All_Actions_Callback (scene,context):    
-    
     global FBX_AllActions
     FBX_AllActions = scene.FBX_All_Actions
     print ("Base name = " + str(FBX_AllActions))
     
 def FBX_Anim_Steep_Callback (scene,context):    
-    
     global FBX_AnimStep
     FBX_AnimStep = scene.FBX_Anim_Step
     print ("Base name = " + str(FBX_AnimStep))
     
 def FBX_Anim_Simplify_Callback (scene,context):    
-    
     global FBX_AnimSimplify
     FBX_AnimSimplify = scene.FBX_Anim_Simplify
     print ("Base name = " + str(FBX_AnimSimplify))
     
 def FBX_Use_Anim_Callback (scene,context):    
-    
     global FBX_UseAnim
     FBX_UseAnim = scene.FBX_Use_Anim
     print ("Base name = " + str(FBX_UseAnim))
     
 def FBX_All_Actions_61_Callback (scene,context):    
-    
     global FBX_AllActions61
     FBX_AllActions61 = scene.FBX_All_Actions_61
     print ("Base name = " + str(FBX_AllActions61))
     
 def FBX_Pivot_To_Center_Callback (scene,context):    
-    
     global FBX_PivotToCenter
     FBX_PivotToCenter = scene.FBX_Pivot_to_Center
     print ("Base name = " + str(FBX_PivotToCenter))  
     
-
-    
-
 #-------------------------------------------
 #-----------FBX EXPORT PROPERTIES-----------
 #-------------------------------------------
+
 def FBX_Export_Properties(scn):
-    
     #Use Smoothing faces?
-    
     #Smoothing items
     FBX_smooth_Type = [
                     ('OFF', 'OFF', 'OFF'),
                     ('FACE', 'FACE', 'FACE'),
                     ('EDGE', 'EDGE' ,'EDGE')
                     ]
-    
     #Smoothing
     bpy.types.Scene.FBX_Smoothing = EnumProperty(
         items = FBX_smooth_Type,                      
@@ -687,7 +626,6 @@ def FBX_Export_Properties(scn):
         update = FBX_Smoothing_Selector_Callback,
         description='Smoothing type for the objects')
     scn['FBX_Smoothing'] = 0    
-
     #Pivot To center
     bpy.types.Scene.FBX_Pivot_to_Center = BoolProperty(
         name = "Pivot To Center",
@@ -695,14 +633,11 @@ def FBX_Export_Properties(scn):
         update = FBX_Pivot_To_Center_Callback, 
         description = "Allow to Export objects with the correct pivot point without have the object at the center of the scene")
     scn['FBX_Pivot_to_Center'] = False 
-    
-    
     #name origins
     FBX_name_origins = [
                     ('Object', 'Object', 'Object'),
                     ('Custom', 'Custom', 'Custom')
                     ]
-    
     #naming base
     bpy.types.Scene.FBX_base_name = EnumProperty(
         items = FBX_name_origins,                      
@@ -711,7 +646,6 @@ def FBX_Export_Properties(scn):
         update = FBX_Base_Name_Selector_Callback,
         description='Base name for Export as FBX')
     scn['FBX_base_name'] = 0
-    
     #Show Axis?
     bpy.types.Scene.FBX_Show_Axis = BoolProperty(
         name = "Show Axis",
@@ -719,9 +653,7 @@ def FBX_Export_Properties(scn):
         update = FBX_Show_Axis_Callback, 
         description = "Check for show Axis Orientation")
     scn['FBX_Show_Axis'] = False
-    
-    
-    
+
     #Axis_Forward inputs
     FBX_Axis_ForwardList = [
                         ('X', "X Forward", ""),
@@ -740,7 +672,6 @@ def FBX_Export_Properties(scn):
         update = FBX_Axis_Forward_Callback,
         description='Set the Forward Axis')
     scn['FBX_Axis_Forward'] = 5
-    
     #Axis_Up inputs
     FBX_Axis_UpList = [
                         ('X', "X Up", ""),
@@ -760,10 +691,6 @@ def FBX_Export_Properties(scn):
         description='Set the Up Axis')
     scn['FBX_Axis_Up'] = 1
     
-    
-    
-    
-    
     #custom name
     bpy.types.Scene.FBX_Export_Custom_Name = StringProperty(
         name = "FBX Custom Name",
@@ -779,7 +706,6 @@ def FBX_Export_Properties(scn):
         description = "Export into relative folder called: UE Assets")
     scn['FBX_Relative_Assets_Folder'] = True    
     
-    
     #custom Path
     bpy.types.Scene.FBX_Custom_Export_Path = StringProperty(
         name = "FBX Custom Folder",
@@ -788,9 +714,6 @@ def FBX_Export_Properties(scn):
         subtype = 'DIR_PATH')
     scn['FBX_Custom_Export_Path'] = ""
     
-
-
-    
     #Export Collision Objects too
     bpy.types.Scene.FBX_Export_Collision_Obj = BoolProperty(
         name = "Export Collision Objects",
@@ -798,8 +721,6 @@ def FBX_Export_Properties(scn):
         update = FBX_Export_Collision_Callback, 
         description = "Export Collision Objects along selected objects")
     scn['FBX_Export_Collision_Obj'] = False   
-    
-
     
     #Use Tangent Space ?
     bpy.types.Scene.FBX_TangentSpace = BoolProperty(
