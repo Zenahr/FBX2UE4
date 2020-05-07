@@ -1,5 +1,8 @@
-# UE4-Tools
-Blender addon for improve the workflow between blender and Unreal engine 4
+I used UE4-Tools as a starting point for this project.
+https://github.com/lluisgarcia/UE4-Tools
+
+# FBX2UE4
+Blender addon for improving the workflow between blender and Unreal engine 4
 
 Videos and Documentation about the addon here:
 http://www.lluisgarcia.es/ue-tools-addon/
