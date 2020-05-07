@@ -10,3 +10,4 @@ https://www.youtube.com/watch?time_continue=1&v=oLcWcPHGjdo&feature=emb_title
 
 ROADMAP for my fork of this project:
 - add support for Blender v2.8 (should be working for blender 2.79)
+---> https://www.youtube.com/watch?v=Mjy-zGG3Wk4
